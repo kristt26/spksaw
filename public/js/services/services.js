@@ -1,8 +1,10 @@
 angular.module('services', [])
     .factory('UserServices', UserServices)
     .factory('PetugasServices', PetugasServices)
-    .factory('WajibPajakServices', WajibPajakServices)
-    .factory('KategoriServices', KategoriServices)
+    .factory('PelangganServices', PelangganServices)
+    .factory('PermintaanServices', PermintaanServices)
+    .factory('LaporanServices', LaporanServices)
+    .factory('HomeServices', HomeServices)
     ;
 
 function UserServices($http, $q, helperServices) {
@@ -84,7 +86,7 @@ function UserServices($http, $q, helperServices) {
 
 }
 function PetugasServices($http, $q, helperServices, AuthService) {
-    var controller = helperServices.url + '/petugas/';
+    var controller = helperServices.url + '/karyawan/';
     var service = {};
     service.data = [];
     service.instance = false;
@@ -152,6 +154,7 @@ function PetugasServices($http, $q, helperServices, AuthService) {
                     data.alamat = param.alamat;
                     data.kontak = param.kontak;
                     data.email = param.email;
+                    data.username = param.username;
                 }
                 def.resolve(res.data);
             },
@@ -184,8 +187,8 @@ function PetugasServices($http, $q, helperServices, AuthService) {
     }
 
 }
-function WajibPajakServices($http, $q, helperServices, AuthService) {
-    var controller = helperServices.url + '/wajibpajak/';
+function PelangganServices($http, $q, helperServices, AuthService) {
+    var controller = helperServices.url + '/csr/pelanggan/';
     var service = {};
     service.data = [];
     service.instance = false;
@@ -259,7 +262,164 @@ function WajibPajakServices($http, $q, helperServices, AuthService) {
         var def = $q.defer();
         $http({
             method: 'put',
-            url: helperServices.url + 'update',
+            url: controller + 'update',
+            data: param,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                var data = service.data.find(x => x.id == param.id);
+                if (data) {
+                    data.kodepelanggan = param.kodepelanggan;
+                    data.nama = param.nama;
+                    data.kontak = param.kontak;
+                    data.alamat = param.alamat;
+                    data.email = param.email;
+                }
+                def.resolve(res.data);
+            },
+            (err) => {
+                def.reject(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: err.data
+                })
+            }
+        );
+        return def.promise;
+    }
+
+}
+
+function PermintaanServices($http, $q, helperServices, AuthService) {
+    var controller = helperServices.url + '/csr/permintaan/';
+    var service = {};
+    service.data = [];
+    service.instance = false;
+    return {
+        get: get, post: post, put: put, getDetail: getDetail, proses:proses, pending:pending
+    };
+
+    function get() {
+        var def = $q.defer();
+        if (service.instance) {
+            def.resolve(service.data);
+        } else {
+            $http({
+                method: 'get',
+                url: controller + 'get',
+                headers: AuthService.getHeader()
+            }).then(
+                (res) => {
+                    service.instance = true;
+                    service.data = res.data;
+                    def.resolve(res.data);
+                },
+                (err) => {
+                    console.log(err.data);
+                    def.reject(err);
+
+                }
+            );
+        }
+        return def.promise;
+    }
+    function getDetail() {
+        var def = $q.defer();
+        id = helperServices.absUrl.split('/');
+		id = id[id.length - 1];
+        $http({
+            method: 'get',
+            url: controller + 'get/' + id,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                def.resolve(res.data);
+            },
+            (err) => {
+                def.reject(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: err.data
+                })
+            }
+        );
+        return def.promise;
+    }
+    function post(param) {
+        var def = $q.defer();
+        $http({
+            method: 'post',
+            url: controller + 'add',
+            data: param,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                service.data.push(res.data);
+                def.resolve(res.data);
+            },
+            (err) => {
+                def.reject(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: err.data
+                })
+            }
+        );
+        return def.promise;
+    }
+    function proses(param) {
+        var def = $q.defer();
+        $http({
+            method: 'post',
+            url: controller + 'proses',
+            data: param,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                def.resolve(res.data);
+            },
+            (err) => {
+                def.reject(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: err.data
+                })
+            }
+        );
+        return def.promise;
+    }
+    function pending(param) {
+        var def = $q.defer();
+        $http({
+            method: 'post',
+            url: controller + 'pending',
+            data: param,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                def.resolve(res.data);
+            },
+            (err) => {
+                def.reject(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: err.data
+                })
+            }
+        );
+        return def.promise;
+    }
+
+    function put(param) {
+        var def = $q.defer();
+        $http({
+            method: 'put',
+            url: controller + 'update',
             data: param,
             headers: AuthService.getHeader()
         }).then(
@@ -282,44 +442,21 @@ function WajibPajakServices($http, $q, helperServices, AuthService) {
     }
 
 }
-function KategoriServices($http, $q, helperServices, AuthService) {
-    var controller = helperServices.url + '/kategori/';
+function LaporanServices($http, $q, helperServices, AuthService) {
+    var controller = helperServices.url + '/laporan/';
     var service = {};
     service.data = [];
     service.instance = false;
     return {
-        get: get, post: post, put: put, getDetail: getDetail
+        get: get
     };
 
-    function get() {
-        var def = $q.defer();
-        if (service.instance) {
-            def.resolve(service.data);
-        } else {
-            $http({
-                method: 'get',
-                url: controller + 'get',
-                headers: AuthService.getHeader()
-            }).then(
-                (res) => {
-                    service.instance = true;
-                    service.data = res.data;
-                    def.resolve(res.data);
-                },
-                (err) => {
-                    console.log(err.data);
-                    def.reject(err);
-
-                }
-            );
-        }
-        return def.promise;
-    }
-    function getDetail(id) {
+    function get(item) {
         var def = $q.defer();
         $http({
-            method: 'get',
-            url: controller + 'get/' + id,
+            method: 'post',
+            url: controller + 'get',
+            data: item,
             headers: AuthService.getHeader()
         }).then(
             (res) => {
@@ -327,53 +464,35 @@ function KategoriServices($http, $q, helperServices, AuthService) {
             },
             (err) => {
                 console.log(err.data);
-                def.reject(err);
-
-            }
-        );
-        return def.promise;
-    }
-    function post(param) {
-        var def = $q.defer();
-        $http({
-            method: 'post',
-            url: controller + 'add',
-            data: param,
-            headers: AuthService.getHeader()
-        }).then(
-            (res) => {
-                service.data.push(res.data);
-                def.resolve(res.data);
-            },
-            (err) => {
-                def.reject(err);
-                message.error(err);
+                def.reject(err.data);
             }
         );
         return def.promise;
     }
 
-    function put(param) {
+}
+function HomeServices($http, $q, helperServices, AuthService) {
+    var controller = helperServices.url + '/home/';
+    var service = {};
+    service.data = [];
+    service.instance = false;
+    return {
+        get: get
+    };
+
+    function get(item) {
         var def = $q.defer();
         $http({
-            method: 'put',
-            url: helperServices.url + 'update',
-            data: param,
+            method: 'get',
+            url: controller + 'get',
             headers: AuthService.getHeader()
         }).then(
             (res) => {
-                var data = service.data.find(x => x.id == param.id);
-                if (data) {
-                    data.firstName = param.firstName;
-                    data.lastName = param.lastName;
-                    data.userName = param.userName;
-                    data.email = param.email;
-                }
                 def.resolve(res.data);
             },
             (err) => {
-                def.reject(err);
-                message.error(err);
+                console.log(err.data);
+                def.reject(err.data);
             }
         );
         return def.promise;

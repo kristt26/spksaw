@@ -2,10 +2,11 @@ angular.module('apps', [
     'adminctrl',
     'helper.service',
     'auth.service',
-    'services'
+    'services',
+    'datatables'
 ])
     .controller('indexController', function ($scope) {
-        $scope.titleHeader = "SI Wajib Pajak";
+        $scope.titleHeader = "Indihome Sistem";
         $scope.header = "";
         $scope.breadcrumb = "";
 

@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>Indihome Sistem | Log in</title>
+  <link rel="icon" href="<?=base_url('favicon.ico')?>">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,20 +19,28 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition login-page" ng-app="apps" ng-controller="loginController">
+<body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <img src="<?=base_url()?>public/img/logo.png" width="35%" alt=""><br>
-    <h3>Pendataan Wajib Pajak</h3>
+    <img src="<?=base_url()?>public/img/telkom.png" width="75%" alt=""><br><br>
+    <h4>Sistem Pengajuan Perubahan Layanan Indihome</h4>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
-      <form action="<?=base_url()?>public/index3.html" method="post">
+      <?php
+        if($this->session->flashdata('pesan')):
+      ?>
+      <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                  <?= $this->session->flashdata('pesan')?>
+                </div>
+        <?php endif; ?>
+      <form method="post" accept-charset="utf-8" action="<?= base_url()?>auth/login">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="text" class="form-control" name="username" placeholder="Username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -39,7 +48,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

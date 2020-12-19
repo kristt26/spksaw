@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{titleHeader}}</title>
+  <link rel="icon" href="<?=base_url('favicon.ico')?>">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,14 +30,45 @@
   <link rel="stylesheet" href="<?=base_url()?>public/plugins/sweetalert2/sweetalert2.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url()?>public/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+            .containerr {
+                display: flex;
+                height: 60vh;
+                justify-content: center;
+                align-items: center;
+                direction: row;
+            }
+         
+            @media screen {
+                #print {
+                    /* font-family:verdana, arial, sans-serif; */
+                }
+                .screen{
+                    display:none;
+                }
+            }
+
+            @media print {
+                /* #print {font-family:georgia, times, serif;} */
+                .screen{
+                    display:block;
+                }
+            }
+        </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
+  <?php
+    if(!$this->session->userdata('is_login')){
+      redirect('auth');
+    }
+  ?>
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-dark navbar-indihome">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -46,10 +78,15 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <a class="nav-link" href="<?=base_url('auth/logout')?>" role="button">
             LOGOUT
           </a>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+            THEMA
+          </a>
+        </li> -->
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -57,16 +94,16 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="<?=base_url()?>public/index3.html" class="brand-link">
-        <img src="<?=base_url()?>public/img/logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
+      <a href="<?=base_url()?>public/index3.html" class="brand-link navbar-indihome">
+        <img src="<?=base_url()?>public/img/indihome.png" alt="AdminLTE Logo" class="brand-image elevation-5"
           style="opacity: .8">
-        <span class="brand-text font-weight-light">Wajib Pajak</span>
+        <span class="brand-text font-weight-light">Layanan Indihome</span>
       </a>
 
       <!-- Sidebar -->
-      <?php
+      <?php 
         $this->load->view('_shared/sidebar');
-      ?>
+       ?>
       <!-- /.sidebar -->
     </aside>
 
@@ -97,14 +134,14 @@
 
     <footer class="main-footer">
       <div class="float-right d-none d-sm-block">
-        <b>Sistem Informasi pendataan Wajib Pajak</b>
+        <b>Sistem Informasi Perubahan Paket Indihome</b>
       </div>
-      <strong>Copyright &copy; 2020
+      <strong>Copyright &copy; 2020 Nurjanah
     </footer>
 
     <!-- Control Sidebar -->
-    <!-- <aside class="control-sidebar control-sidebar-dark">
-    </aside> -->
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
@@ -137,8 +174,12 @@
   <!-- Bootstrap Switch -->
   <script src="<?=base_url()?>public/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
   <script src="<?=base_url()?>public/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="<?=base_url()?>public/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?=base_url()?>public/plugins/angular-datatables/dist/angular-datatables.min.js"></script>
+  <script src="<?=base_url()?>public/plugins/loading/dist/loadingoverlay.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?=base_url()?>public/dist/js/adminlte.min.js"></script>
+  <script src="<?php echo base_url('public/js/jquery.PrintArea.js'); ?>"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?=base_url()?>public/dist/js/demo.js"></script>
   <script src="<?=base_url();?>public/js/googleMap.js"></script>
@@ -151,6 +192,8 @@
       $('.select2').select2({
         placeholder: '--- Pilih Item ---'
       });
+
+      $.LoadingOverlay("show");
 
       //Initialize Select2 Elements
       $('.select2bs4').select2({
@@ -172,10 +215,9 @@
       $('#reservation').daterangepicker()
       //Date range picker with time picker
       $('#reservationtime').daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
+        timePicker: false,
         locale: {
-          format: 'MM/DD/YYYY hh:mm A'
+          format: 'YYYY-MM-DD'
         }
       })
       //Date range as a button

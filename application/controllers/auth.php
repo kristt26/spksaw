@@ -18,13 +18,26 @@ class auth extends CI_Controller
 
     public function login()
     {
-        $data = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-        $result = $this->User_model->select($data);
-        if ($result != false) {
+        $data = $this->input->post();
+        $result = $this->User_model->login($data);
+        if (!is_null($result)) {
             $result['is_login'] = true;
             $this->session->set_userdata($result);
-            echo json_encode($result);
+            if($result['role']=='Admin'){
+                redirect('home');
+            }else{
+                redirect('csr/home');
+            }
+        }else{
+            $this->session->set_flashdata('pesan', 'Username tidak ditemukan!!!');
+            redirect('auth');
         }
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth');
     }
 
 }
