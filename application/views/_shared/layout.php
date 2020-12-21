@@ -49,12 +49,18 @@
                 .screen{
                     display:none;
                 }
+                .settt{
+                    display:block;
+                }
             }
 
             @media print {
                 /* #print {font-family:georgia, times, serif;} */
                 .screen{
                     display:block;
+                }
+                .settt{
+                    display:none;
                 }
             }
         </style>
@@ -68,7 +74,7 @@
   ?>
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-dark navbar-indihome">
+    <nav class="main-header navbar navbar-expand navbar-dark navbar-warnabiru">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -94,10 +100,10 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="<?=base_url()?>public/index3.html" class="brand-link navbar-indihome">
-        <img src="<?=base_url()?>public/img/indihome.png" alt="AdminLTE Logo" class="brand-image elevation-5"
+      <a href="<?=base_url()?>public/index3.html" class="brand-link navbar-warnabiru">
+        <img src="<?=base_url()?>public/img/logo.png" alt="SPK SAW" class="brand-image elevation-5"
           style="opacity: .8">
-        <span class="brand-text font-weight-light">Layanan Indihome</span>
+        <span class="brand-text font-weight-light">SPK SAW</span>
       </a>
 
       <!-- Sidebar -->
@@ -134,9 +140,9 @@
 
     <footer class="main-footer">
       <div class="float-right d-none d-sm-block">
-        <b>Sistem Informasi Perubahan Paket Indihome</b>
+        <b>SPK SAW</b>
       </div>
-      <strong>Copyright &copy; 2020 Nurjanah
+      <strong>Copyright &copy; 2020 Octagon Cendrawasih Solution (OCS)
     </footer>
 
     <!-- Control Sidebar -->

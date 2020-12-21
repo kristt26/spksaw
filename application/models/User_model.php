@@ -40,31 +40,10 @@ class User_model extends CI_Model
     {
         $user = $data['username'];
         $password = md5($data['password']);
-        $string = "";
-        if(filter_var($user, FILTER_VALIDATE_EMAIL)) {
-            $string = "karyawan.email = '$user' AND user.password='$password'";
-        }else{
-            $string = "user.username = '$user' AND user.password='$password'";
-        }
         $datauser = $this->db->query("SELECT
-            `karyawan`.`id`,
-            `karyawan`.`nama`,
-            `karyawan`.`alamat`,
-            `karyawan`.`sex`,
-            `karyawan`.`kontak`,
-            `karyawan`.`userid`,
-            `karyawan`.`email`,
-            `user`.`username`,
-            `user`.`status`,
-            `role`.`role`
-        FROM
-            `karyawan`
-            LEFT JOIN `user` ON `user`.`id` = `karyawan`.`userid`
-            LEFT JOIN `userrole` ON `userrole`.`userid` = `user`.`id`
-            LEFT JOIN `role` ON `role`.`id` = `userrole`.`roleid` WHERE $string")->row_array();
+            * 
+            FROM user WHERE (username = '$user' OR email = '$user') AND password = '$password'")->row_array();
         return $datauser;
     }
 
 }
-
-/* End of file Kategori_model.php */

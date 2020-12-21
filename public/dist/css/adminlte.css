@@ -31218,4 +31218,75 @@ a.text-muted:hover {
 [class*="accent-"] a.btn-dark {
   color: #ffffff;
 }
+
+.card-bluecolor:not(.card-outline) > .card-header {
+  background-color: #154e8b;
+}
+
+.card-bluecolor:not(.card-outline) > .card-header,
+.card-bluecolor:not(.card-outline) > .card-header a {
+  color: #ffffff;
+}
+
+.card-bluecolor:not(.card-outline) > .card-header a.active {
+  color: #1F2D3D;
+}
+
+.card-bluecolor.card-outline {
+  border-top: 3px solid #154e8b;
+}
+
+.card-bluecolor.card-outline-tabs > .card-header a:hover {
+  border-top: 3px solid #dee2e6;
+}
+
+.card-bluecolor.card-outline-tabs > .card-header a.active {
+  border-top: 3px solid #154e8b;
+}
+
+.bg-bluecolor .btn-tool,
+.bg-gradient-bluecolor .btn-tool,
+.card-bluecolor:not(.card-outline) .btn-tool {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-bluecolor .btn-tool:hover,
+.bg-gradient-bluecolor .btn-tool:hover,
+.card-bluecolor:not(.card-outline) .btn-tool:hover {
+  color: #ffffff;
+}
+
+.card.bg-bluecolor .bootstrap-datetimepicker-widget .table td,
+.card.bg-bluecolor .bootstrap-datetimepicker-widget .table th,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget .table td,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget .table th {
+  border: none;
+}
+
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table thead tr:first-child th:hover,
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table td.day:hover,
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table td.hour:hover,
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table td.minute:hover,
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table td.second:hover,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table thead tr:first-child th:hover,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table td.day:hover,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table td.hour:hover,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table td.minute:hover,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table td.second:hover {
+  background: #0b417a;
+  color: #ffffff;
+}
+
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table td.today::before,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table td.today::before {
+  border-bottom-color: #ffffff;
+}
+
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table td.active,
+.card.bg-bluecolor .bootstrap-datetimepicker-widget table td.active:hover,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table td.active,
+.card.bg-gradient-bluecolor .bootstrap-datetimepicker-widget table td.active:hover {
+  background: #3978bd;
+  color: #ffffff;
+}
 /*# sourceMappingURL=adminlte.css.map */

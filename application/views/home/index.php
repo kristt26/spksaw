@@ -1,54 +1,42 @@
 <div class="row" ng-controller="homeController">
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-4 col-6">
     <!-- small box -->
     <div class="small-box bg-info">
       <div class="inner">
-        <h3>{{datas.totalpelanggan}}</h3>
+        <h4>{{datass.karyawan.length}}</h4>
 
-        <p>Total Pelanggan</p>
+        <p>Total Karyawan Aktif</p>
       </div>
       <div class="icon">
         <i class="ion ion-person-add"></i>
       </div>
     </div>
   </div>
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-4 col-6">
     <!-- small box -->
     <div class="small-box bg-danger">
       <div class="inner">
-        <h3>{{datas.totalpermintaan}}</h3>
+        <h4>{{datass.periode ? datass.periode.periode : 'Periode tidak ditemuka'}}</h4>
 
-        <p>Total Permintaan</p>
+        <p>Periode Aktif</p>
       </div>
       <div class="icon">
-        <i class="ion ion-stats-bars"></i>
+        <i class="ion ion-android-calendar"></i>
       </div>
     </div>
   </div>
-  <div class="col-lg-3 col-6">
+  <div class="col-lg-4 col-6">
     <!-- small box -->
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3>{{datas.proses}}</h3>
+        <h4>{{hasilAkhir.hasil==0 ? 'Analisa Belum dilakukan' : hasilAkhir.karyawan}}</h4>
 
-        <p>Proses</p>
+        <p>Karyawan Terbaik Periode Aktif</p>
       </div>
       <div class="icon">
-        <i class="ion ion-stats-bars"></i>
+        <i class="ion ion-clipboard"></i>
       </div>
     </div>
   </div>
-  <div class="col-lg-3 col-6">
-    <!-- small box -->
-    <div class="small-box bg-success">
-      <div class="inner">
-        <h3>{{datas.success}}</h3>
-
-        <p>Success</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-stats-bars"></i>
-      </div>
-    </div>
-  </div>
+  
 </div>

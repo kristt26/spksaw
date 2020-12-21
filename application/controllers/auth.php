@@ -23,11 +23,7 @@ class auth extends CI_Controller
         if (!is_null($result)) {
             $result['is_login'] = true;
             $this->session->set_userdata($result);
-            if($result['role']=='Admin'){
-                redirect('home');
-            }else{
-                redirect('csr/home');
-            }
+            redirect('home');
         }else{
             $this->session->set_flashdata('pesan', 'Username tidak ditemukan!!!');
             redirect('auth');

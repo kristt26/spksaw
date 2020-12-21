@@ -8,7 +8,8 @@ class home extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Home_model');
+        $this->load->model('Karyawan_model');
+        $this->load->model('Periode_model');
     }
     
     public function index()
@@ -18,7 +19,8 @@ class home extends CI_Controller
     }
     public function get()
     {
-        $result = $this->Home_model->select();
+        $result['periode'] = $this->Periode_model->selectActive();
+        $result['karyawan'] = $this->Karyawan_model->selectByStatus();
         echo json_encode($result);
     }
 }

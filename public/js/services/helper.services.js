@@ -5,7 +5,7 @@ function helperServices($location) {
     service.url = $location.$$protocol + '://' + $location.$$host;
     if ($location.$$port) {
         // service.url = service.url + ':' + $location.$$port;
-        service.url = service.url + ':' + $location.$$port + '/indihome';
+        service.url = service.url + ':' + $location.$$port + '/spksaw';
     }
 
     // '    http://localhost:5000';
@@ -52,7 +52,7 @@ function helperServices($location) {
     }
     service.roles = { id: 2, role: 'CSR' };
     service.sex = ['Pria', 'Wanita'];
-    service.paket = ['10 Mbps', '20 Mbps', '50 Mbps', '100 Mbps', '200 Mbps', '300 Mbps'];
-    service.jenispengajuan = ['Upgrade', 'Downgrade', 'Tambah Minipack', 'Hapus Minipack', 'Migrasi Paket'];
+    service.kategorikriteria = ['Benefit', 'Cost'];
+    service.status = ['Aktif', 'Tidak Aktif'];
     return service;
 }

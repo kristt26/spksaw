@@ -6,7 +6,7 @@ angular.module('apps', [
     'datatables'
 ])
     .controller('indexController', function ($scope) {
-        $scope.titleHeader = "Indihome Sistem";
+        $scope.titleHeader = "SPK SAW";
         $scope.header = "";
         $scope.breadcrumb = "";
 

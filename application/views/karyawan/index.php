@@ -1,39 +1,28 @@
-<div class="row" ng-controller="petugasController">
+<div class="row" ng-controller="karyawanController">
   <div class="col-md-4">
-    <div class="card card-danger">
+    <div class="card card-bluecolor">
       <div class="card-header">
-        <h3 class="card-title"><i class="fas fa-plus-square fa-1x" ></i>&nbsp;&nbsp; Input Petugas</h3>
+        <h3 class="card-title"><i class="fas fa-plus-square fa-1x" ></i>&nbsp;&nbsp; Input Karyawan</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
         <form role="form" ng-submit="save()">
           <div class="form-group">
+            <label for="nik" class="col-form-label col-form-label-sm">NIK</label>
+            <input type="text" class="form-control  form-control-sm" id="nik" ng-model="model.nik" placeholder="NIK Petugas" required>
+          </div>
+          <div class="form-group">
             <label for="nama" class="col-form-label col-form-label-sm">Nama</label>
-            <input type="text" class="form-control  form-control-sm" id="nama" ng-model="model.nama" placeholder="Nama Petugas">
+            <input type="text" class="form-control  form-control-sm" id="nama" ng-model="model.nama" placeholder="Nama Petugas" required>
           </div>
           <div class="form-group">
-            <label for="nama" class="col-form-label col-form-label-sm">Jenis Kelamin</label>
-            <select class="form-control form-control-sm" ng-options="item as item for item in sexs" ng-model="model.sex"></select>
+            <label for="jabatan" class="col-form-label col-form-label-sm">Jabatan</label>
+            <input type="text" class="form-control  form-control-sm" id="jabatan" ng-model="model.jabatan" placeholder="Jabatan Petugas" required>
           </div>
           <div class="form-group">
-            <label for="alamat" class="col-form-label col-form-label-sm">Alamat</label>
-            <textarea class="form-control  form-control-sm" id="alamat" ng-model="model.alamat" placeholder="Alamat Petugas" row="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="kontak" class="col-form-label col-form-label-sm">Telepon</label>
-            <input type="text" class="form-control  form-control-sm" id="kontak" ng-model="model.kontak" placeholder="No. Telepon">
-          </div>
-          <div class="form-group">
-            <label for="email" class="col-form-label col-form-label-sm">Email</label>
-            <input type="email" class="form-control  form-control-sm" id="email" ng-model="model.email" placeholder="Email Petugas">
-          </div>
-          <div class="form-group">
-            <label for="username" class="col-form-label col-form-label-sm">Username</label>
-            <input type="text" class="form-control  form-control-sm" id="username" ng-model="model.username" placeholder="Username">
-          </div>
-          <div class="form-group" ng-show = "simpan">
-            <label for="password" class="col-form-label col-form-label-sm">Password</label>
-            <input type="password" class="form-control  form-control-sm" id="password" ng-model="model.password" placeholder="Password">
+            <label for="kategori" class="col-form-label col-form-label-sm">Status</label>
+            <select id="kategori" class="form-control  form-control-sm"
+              ng-options="item as item for item in status" ng-model="model.status" required></select>
           </div>
           <div class="form-group d-flex justify-content-end">
             <button type="submit" class="btn btn-primary btn-sm pull-right">{{simpan ? 'Simpan': 'Ubah'}}</button>
@@ -45,9 +34,9 @@
     </div>
   </div>
   <div class="col-md-8">
-    <div class="card card-danger">
+    <div class="card card-bluecolor">
       <div class="card-header">
-        <h3 class="card-title"><i class="fas fa-th-list"></i>&nbsp;&nbsp; List Petugas</h3>
+        <h3 class="card-title"><i class="fas fa-th-list"></i>&nbsp;&nbsp; List Karyawan</h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0" style="height: 200px;">
@@ -55,24 +44,20 @@
           <thead>
             <tr>
               <th>No</th>
+              <th>NIK</th>
               <th>Nama</th>
-              <th>Jenis Kelamin</th>
-              <th>Alamat</th>
-              <th>Telepon</th>
-              <th>Email</th>
-              <th>Role</th>
+              <th>Jabatan</th>
+              <th>Status</th>
               <th><i class="fas fa-cog"></i></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="item in datas">
               <td>{{$index+1}}</td>
+              <td>{{item.nik}}</td>
               <td>{{item.nama}}</td>
-              <td>{{item.sex}}</td>
-              <td><span class="tag tag-success">{{item.alamat}}</span></td>
-              <td>{{item.kontak}}</td>
-              <td>{{item.email}}</td>
-              <td>{{item.roles.role}}</td>
+              <td>{{item.jabatan}}</td>
+              <td>{{item.status}}</td>
               <td>
                 <button type="button" class="btn btn-warning btn-sm" ng-click ="edit(item)"><i class="fas fa-edit"></i></button>
               </td>

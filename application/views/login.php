@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Indihome Sistem | Log in</title>
+  <title>SPK SAW | Log in</title>
   <link rel="icon" href="<?=base_url('favicon.ico')?>">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +22,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <img src="<?=base_url()?>public/img/telkom.png" width="75%" alt=""><br><br>
-    <h4>Sistem Pengajuan Perubahan Layanan Indihome</h4>
+    <img src="<?=base_url()?>public/img/btn.png" width="75%" alt=""><br><br>
+    <h4>SPK Pemilihan Karyawan Terbaik</h4>
   </div>
   <!-- /.login-logo -->
   <div class="card">
