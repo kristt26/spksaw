@@ -50,7 +50,7 @@
               <td>{{item.periode}}</td>
               <td>{{item.keterangan}}</td>
               <td>
-                <div class="custom-control custom-switch">
+                <div class="custom-control custom-switch" ng-show="item.setstatus">
                   <input type="checkbox" class="custom-control-input" id="{{item.id}}" ng-model="item.setstatus"
                     ng-change="save(item)">
                   <label class="custom-control-label" for="{{item.id}}"></label>

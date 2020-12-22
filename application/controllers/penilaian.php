@@ -31,7 +31,7 @@ class Penilaian extends CI_Controller
 
     public function getbyperiode($id = null)
     {
-        $result = $this->Penilaian_model->selectByKaryawan($id);
+        $result = $this->Penilaian_model->selectLaporan($id);
         echo json_encode($result);
     }
 
