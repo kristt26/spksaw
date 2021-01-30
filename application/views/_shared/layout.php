@@ -31,6 +31,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url()?>public/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="<?=base_url()?>public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/plugins/angular-datatables/dist/css/angular-datatables.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <style>
@@ -41,7 +42,7 @@
                 align-items: center;
                 direction: row;
             }
-         
+
             @media screen {
                 #print {
                     /* font-family:verdana, arial, sans-serif; */
@@ -68,10 +69,10 @@
 
 <body class="hold-transition sidebar-mini">
   <?php
-    if(!$this->session->userdata('is_login')){
-      redirect('auth');
-    }
-  ?>
+if (!$this->session->userdata('is_login')) {
+    redirect('auth');
+}
+?>
   <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark navbar-warnabiru">
@@ -107,9 +108,9 @@
       </a>
 
       <!-- Sidebar -->
-      <?php 
-        $this->load->view('_shared/sidebar');
-       ?>
+      <?php
+$this->load->view('_shared/sidebar');
+?>
       <!-- /.sidebar -->
     </aside>
 

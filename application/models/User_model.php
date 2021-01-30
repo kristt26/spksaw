@@ -46,4 +46,25 @@ class User_model extends CI_Model
         return $datauser;
     }
 
+    public function checkUser()
+    {
+        $result = $this->db->get('user')->result();
+        if(count($result)==0){
+            $this->db->trans_begin();
+            $user = [
+                'username'=>'Admin',
+                'password'=> md5('admin'),
+                'email'=> 'admin@mail.com',
+                'nama'=> 'Administrator',
+                'jabatan'=> 'admin',
+            ];
+            $this->db->insert('user', $user);
+            if($this->db->trans_status()){
+                $this->db->trans_commit();
+            }else{
+                $this->db->trans_rollback();
+            }
+        }
+    }
+
 }

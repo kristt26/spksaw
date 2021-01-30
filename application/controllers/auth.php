@@ -13,6 +13,7 @@ class auth extends CI_Controller
 
     public function index()
     {
+        $this->User_model->checkUser();
         $this->load->view('login');
     }
 

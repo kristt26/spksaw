@@ -1,4 +1,4 @@
-<div class="row" ng-controller="penilaianController">
+<div class="row" ng-controller="penilaianController" ng-init="Init()">
   <div class="col-md-12">
     <div class="card card-bluecolor">
       <div class="card-header">
@@ -28,7 +28,7 @@
                         class="form-control form-control-sm"
                         ng-options="item as (item.subkriteria + ' | ' + item.indikator) for item in kriteria.subkriteria"
                         ng-model="kriteria.nilai" required>
-                        <!-- <option></option> -->
+                        <option></option>
                       </select>
                     </div>
                   </div>
@@ -38,7 +38,7 @@
           </div>
           <div class="form-group d-flex justify-content-end">
             <button type="submit" class="btn btn-primary btn-sm pull-right">Simpan</button>
-            <button type="button" class="btn btn-info btn-sm pull-right" ng-click="analisa()">Analisa</button>
+            <button ng-show="showAnalisa" type="button" class="btn btn-info btn-sm pull-right" ng-click="analisa()">Analisa</button>
             <button type="button" ng-show="!simpan" class="btn btn-warning btn-sm pull-right"
               ng-click="clear()">Clear</button>
           </div>
@@ -144,7 +144,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
+          <!-- <button type="button" class="btn btn-primary">Save</button> -->
         </div>
       </div>
     </div>

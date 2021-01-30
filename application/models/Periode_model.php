@@ -26,14 +26,15 @@ class Periode_model extends CI_Model
     public function insert($data)
     {
         $this->db->trans_begin();
+        $this->db->update('periode', ['status' => 'Tidak Aktif'], ['status' => 'Aktif']);
         $periode = [
             'periode' => $data['periode'],
             'keterangan' => $data['keterangan'],
             'status' => $data['status'],
         ];
-        $this->db->update('periode', ['status' => 'Tidak Aktif'], ['id' => $data['id']]);
         $this->db->insert('periode', $periode);
         $data['id'] = $this->db->insert_id();
+        $data['setstatus'] = $data['status'] == 'Aktif' ? true : false;
         if ($this->db->trans_status()) {
             $this->db->trans_commit();
             return $data;

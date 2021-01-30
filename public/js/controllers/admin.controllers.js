@@ -23,19 +23,21 @@ function homeController($scope, HomeServices, PenilaianServices, KriteriaService
     $scope.periode = {};
     $scope.setValue;
     PenilaianServices.get().then(x => {
-        x.forEach(element => {
-            element.kriteria.forEach(kriteria => {
-                if (kriteria.penilaian) {
-                    kriteria.nilai = kriteria.subkriteria.find(x => x.id == kriteria.penilaian.subkriteriaid);
-                }
+        if(x != 'null'){
+            x.forEach(element => {
+                element.kriteria.forEach(kriteria => {
+                    if (kriteria.penilaian) {
+                        kriteria.nilai = kriteria.subkriteria.find(x => x.id == kriteria.penilaian.subkriteriaid);
+                    }
+                });
             });
-        });
-        $scope.datas = x;
-        HomeServices.get().then(x => {
-            $scope.datass = x;
-            $scope.analisa();
-            $.LoadingOverlay("hide");
-        })
+            $scope.datas = x;
+            HomeServices.get().then(x => {
+                $scope.datass = x;
+                $scope.analisa();
+            })
+        }
+        $.LoadingOverlay("hide");
     })
     $scope.analisa = () => {
         var data = {};
@@ -486,38 +488,42 @@ function penilaianController($scope, helperServices, PenilaianServices, Kriteria
     $scope.model = {};
     $scope.simpan = true;
     $scope.hasilAkhir = {};
+    $scope.showAnalisa = false;
     $scope.hasilAkhir.hasil = 0;
     $scope.periode = {};
     $scope.setValue;
-    PenilaianServices.get().then(x => {
-        if (x !== "null") {
-            x.forEach(element => {
-                element.kriteria.forEach(kriteria => {
-                    if (kriteria.penilaian) {
-                        kriteria.nilai = kriteria.subkriteria.find(x => x.id == kriteria.penilaian.subkriteriaid);
-                    }
+    $scope.Init = ()=>{
+        PenilaianServices.get().then(x => {
+            if (x !== "null") {
+                x.forEach(element => {
+                    element.kriteria.forEach(kriteria => {
+                        if (kriteria.penilaian) {
+                            kriteria.nilai = kriteria.subkriteria.find(x => x.id == kriteria.penilaian.subkriteriaid);
+                        }
+                    });
                 });
-            });
-            $scope.datas = x;
-            PeriodeServices.periodeActive().then(itemperiode => {
-                $scope.periode = itemperiode
+                $scope.datas = x;
+                $scope.showAnalisa = $scope.datas[0].kriteria[0].penilaian ? true : false;
+                PeriodeServices.periodeActive().then(itemperiode => {
+                    $scope.periode = itemperiode
+                    $.LoadingOverlay("hide");
+                })
+            } else {
                 $.LoadingOverlay("hide");
-            })
-        } else {
-            $.LoadingOverlay("hide");
-            Swal.fire({
-                title: 'Information',
-                text: "Periode aktif tidak ditemukan!!!",
-                icon: 'info',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.value) {
-                    document.location.href = helperServices.url + "/periode";
-                }
-            })
-        }
-    })
+                Swal.fire({
+                    title: 'Information',
+                    text: "Periode aktif tidak ditemukan!!!",
+                    icon: 'info',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.value) {
+                        document.location.href = helperServices.url + "/periode";
+                    }
+                })
+            }
+        })
+    }
     $scope.analisa = () => {
         $.LoadingOverlay("show");
         if ($scope.setValue) {
@@ -577,6 +583,7 @@ function penilaianController($scope, helperServices, PenilaianServices, Kriteria
         $.LoadingOverlay("show");
         if ($scope.model.id) {
             PenilaianServices.put($scope.datas).then(result => {
+                $scope.Init();
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -584,15 +591,17 @@ function penilaianController($scope, helperServices, PenilaianServices, Kriteria
                 })
                 $scope.model = {};
                 $scope.simpan = true;
-                $.LoadingOverlay("hide");
+                // $.LoadingOverlay("hide");
             })
         } else {
             PenilaianServices.post($scope.datas).then(result => {
+                $scope.Init();
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
                     text: 'Proses Berhasil'
                 })
+                $scope.showAnalisa = true;
                 $scope.model = {};
                 $.LoadingOverlay("hide");
             })

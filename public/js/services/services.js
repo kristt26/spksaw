@@ -251,6 +251,10 @@ function PeriodeServices($http, $q, helperServices, AuthService) {
             headers: AuthService.getHeader()
         }).then(
             (res) => {
+                service.data.forEach(element => {
+                    element.status='Tidak Aktif';
+                    element.setstatus=false;
+                });
                 service.data.push(res.data);
                 def.resolve(res.data);
             },
@@ -778,23 +782,19 @@ function PenilaianServices($http, $q, helperServices, AuthService) {
 
     function get() {
         var def = $q.defer();
-        if (service.instance) {
-            def.resolve(service.data);
-        } else {
-            $http({
-                method: 'get',
-                url: controller + 'get',
-                headers: AuthService.getHeader()
-            }).then(
-                (res) => {
-                    def.resolve(res.data);
-                },
-                (err) => {
-                    console.log(err.data);
-                    def.reject(err);
-                }
-            );
-        }
+        $http({
+            method: 'get',
+            url: controller + 'get',
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                def.resolve(res.data);
+            },
+            (err) => {
+                console.log(err.data);
+                def.reject(err);
+            }
+        );
         return def.promise;
     }
     function getByPeriode(id) {

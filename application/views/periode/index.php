@@ -33,7 +33,7 @@
         <h3 class="card-title"><i class="fas fa-th-list"></i>&nbsp;&nbsp; List Periode</h3>
       </div>
       <!-- /.card-header -->
-      <div class="card-body table-responsive p-0" style="height: 200px;">
+      <div class="card-body table-responsive p-0" style="height: 500px;">
         <table class="table table-sm table-hover table-head-fixed text-nowrap">
           <thead>
             <tr>
